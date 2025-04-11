@@ -1,0 +1,3 @@
+ecommerce_topic_name = "ecommerce_online_events"
+[kafka_config]
+bootstrap.servers = "localhost:9092"
