@@ -1,0 +1,4 @@
+pandas==2.2.3
+confluent-kafka==2.9.0
+dynaconf==3.2.10
+loguru==0.7.3

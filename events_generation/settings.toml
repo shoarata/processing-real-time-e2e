@@ -1,0 +1,5 @@
+ecommerce_topic_name = "ecommerce_online_events"
+
+[kafka_config]
+bootstrap_servers = "kafka:9092"
+
