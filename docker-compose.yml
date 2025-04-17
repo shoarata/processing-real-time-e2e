@@ -3,5 +3,27 @@ services:
     image: apache/kafka:3.9.0
     container_name: kafka
     ports:
-      - "9092:9092"
+      - "9094:9094"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: MAIN_LISTENER://kafka:9092,CONTROLLER://localhost:9093,OUTSIDE_LISTENER://0.0.0.0:9094
+      KAFKA_ADVERTISED_LISTENERS: MAIN_LISTENER://kafka:9092,OUTSIDE_LISTENER://localhost:9094
+      KAFKA_INTER_BROKER_LISTENER_NAME: MAIN_LISTENER
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,MAIN_LISTENER:PLAINTEXT,OUTSIDE_LISTENER:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_NUM_PARTITIONS: 3
 
+  events_logger:
+    build: events_generation
+    container_name: events_logger
+    command: ["python", "./generate_ecommerce_events.py"]
+    volumes:
+      - ./.secrets.toml:/usr/src/app/.secrets.toml
+    depends_on:
+      - kafka
