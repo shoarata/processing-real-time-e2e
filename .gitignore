@@ -6,3 +6,4 @@ poetry.lock
 **/__pycache__/*
 # Ignore dynaconf secret files
 .secrets.*
+*.jar
