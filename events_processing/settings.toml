@@ -1,0 +1,6 @@
+ecommerce_topic_name = "ecommerce_online_events"
+consumer_group_id = "pyflink_consumer"
+
+[kafka_config]
+bootstrap_servers = "localhost:9094"
+
