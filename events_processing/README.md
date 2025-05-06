@@ -1,6 +1,5 @@
 * To download jars necessary for running flink job locally
     ```bash
-    cd events_processing/
     mvn clean package dependency:copy-dependencies -DoutputDirectory=jars/
     # then delete created target directory
     rm -r target/

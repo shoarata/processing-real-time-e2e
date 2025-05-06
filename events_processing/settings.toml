@@ -1,6 +1,7 @@
 ecommerce_topic_name = "ecommerce_online_events"
 consumer_group_id = "pyflink_consumer"
-
+s3_events_uri = "s3://ecommerce-project-sho/events"
+local_events_uri = "file:///Users/shoarata/Documents/education/real-time-ecommerce-e2e/events_processing/events_data"
 [kafka_config]
 bootstrap_servers = "localhost:9094"
 

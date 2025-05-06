@@ -44,7 +44,7 @@ def log_ecommerce_events():
             month = timestamp[:7]
             producer.produce(topic=settings.ECOMMERCE_TOPIC_NAME, value=event.to_json(), key=month, callback=log_produced_events)
             producer.poll(1)
-            time.sleep(0.2)
+            time.sleep(2)
     except KeyboardInterrupt:
         logger.info("keyboard interrupt, stopping...")
 
