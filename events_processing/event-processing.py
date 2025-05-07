@@ -29,8 +29,8 @@ table_env.create_temporary_table(
     .option("topic", settings.ECOMMERCE_TOPIC_NAME)
     .option("properties.bootstrap.servers", settings.KAFKA_CONFIG.bootstrap_servers)
     .option("properties.group.id", settings.CONSUMER_GROUP_ID)
-    #.option("scan.startup.mode", "group-offsets")
-    .option("scan.startup.mode", "earliest-offset")
+    .option("scan.startup.mode", "group-offsets")
+    .option("properties.auto.offset.reset", "earliest")
     .format(FormatDescriptor.for_format("json").build())
     .build()
 )
@@ -38,9 +38,7 @@ table_env.create_temporary_table(
 events_table = table_env.from_path(ECOMMERCE_EVENTS_TABLE_NAME)
 events_table = events_table.add_columns(date_format(col("event_time"), "yyyy-MM-dd").alias("event_date")) \
     .add_columns(date_format(col("event_time"), "HH").alias("event_hour")) \
-    .add_columns(date_format(col("event_time"), "mm").alias("event_minute")) \
-    .add_columns(date_format(col("event_time"), "yyyy-MM-dd HH:mm:ss").alias("debug_event_time")) \
-    .drop_columns(col("event_time"))
+    .add_columns(date_format(col("event_time"), "mm").alias("event_minute"))
 
 ip_to_location_df = pd.read_csv(
     os.path.join(os.path.dirname(__file__), "IP2LOCATION-LITE-DB1.CSV"),
@@ -55,6 +53,7 @@ def ip_to_country_code(ip_str):
 
 enriched_events_table = events_table.add_columns(ip_to_country_code(col("ip")).alias("country_code"))
 ENRICHED_ECOMMERCE_EVENTS_TABLE_NAME = "ecommerce_platform_events"
+enriched_events_table.print_schema()
 table_env.create_table(
     path=ENRICHED_ECOMMERCE_EVENTS_TABLE_NAME,
     descriptor=TableDescriptor.for_connector("filesystem")

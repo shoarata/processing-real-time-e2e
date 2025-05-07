@@ -22,6 +22,7 @@ ip_location_csv_schema ={
 }
 
 enriched_events_schema = Schema.new_builder() \
+    .column("event_time", DataTypes.TIMESTAMP(3)) \
     .column("event_type", DataTypes.STRING()) \
     .column("product_id", DataTypes.INT()) \
     .column("category_id", DataTypes.BIGINT()) \
@@ -34,6 +35,5 @@ enriched_events_schema = Schema.new_builder() \
     .column("event_date", DataTypes.STRING()) \
     .column("event_hour", DataTypes.STRING()) \
     .column("event_minute", DataTypes.STRING()) \
-    .column("debug_event_time", DataTypes.STRING()) \
     .column("country_code", DataTypes.STRING()) \
     .build()
