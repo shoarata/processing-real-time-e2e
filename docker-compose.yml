@@ -27,3 +27,11 @@ services:
       - ./.secrets.toml:/usr/src/app/.secrets.toml
     depends_on:
       - kafka
+
+  events_processing:
+    build: events_processing
+    container_name: events_processing
+    command: ["python3", "event-processing.py"]
+    depends_on:
+      - kafka
+

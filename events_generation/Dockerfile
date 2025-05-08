@@ -6,5 +6,3 @@ RUN pip install -r requirements.txt
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 COPY . .
-COPY ./config.py .
-COPY ./settings.toml .
