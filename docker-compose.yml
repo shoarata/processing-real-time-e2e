@@ -19,6 +19,41 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_NUM_PARTITIONS: 3
 
+  flinkjobmanager:
+    build: events_processing
+    container_name: job_manager
+    ports:
+      - "8081:8081"
+    environment:
+      - |
+        FLINK_PROPERTIES= 
+        jobmanager.rpc.address: flinkjobmanager
+        parallelism.default: 2
+    command: jobmanager
+  flink_task_manager:
+    build: events_processing
+    container_name: flink_task_manager
+    environment:
+      - |
+        FLINK_PROPERTIES= 
+        jobmanager.rpc.address: flinkjobmanager
+        parallelism.default: 2
+    scale: 1
+    depends_on:
+      - flinkjobmanager
+    command: taskmanager
+  flink_process:
+    build: events_processing
+    container_name: flink_process
+    environment:
+      - |
+        FLINK_PROPERTIES= 
+        jobmanager.rpc.address: flinkjobmanager
+        parallelism.default: 2
+    depends_on:
+      - flinkjobmanager
+    command: ["./bin/flink","run", "--jobmanager", "flinkjobmanager:8081", "--python", "event-processing.py"]
+
   events_logger:
     build: events_generation
     container_name: events_logger
@@ -27,11 +62,3 @@ services:
       - ./.secrets.toml:/usr/src/app/.secrets.toml
     depends_on:
       - kafka
-
-  events_processing:
-    build: events_processing
-    container_name: events_processing
-    command: ["python3", "event-processing.py"]
-    depends_on:
-      - kafka
-
