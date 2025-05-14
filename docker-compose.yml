@@ -20,7 +20,7 @@ services:
       KAFKA_NUM_PARTITIONS: 3
 
   flinkjobmanager:
-    build: events_processing
+    build: flink_processing
     container_name: job_manager
     ports:
       - "8081:8081"
@@ -31,14 +31,14 @@ services:
         parallelism.default: 2
     command: jobmanager
   flink_task_manager:
-    build: events_processing
-    container_name: flink_task_manager
+    build: flink_processing
     environment:
       - |
         FLINK_PROPERTIES= 
         jobmanager.rpc.address: flinkjobmanager
         parallelism.default: 2
-    scale: 1
+    deploy:
+      replicas: 3
     depends_on:
       - flinkjobmanager
     command: taskmanager
