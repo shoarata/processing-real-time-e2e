@@ -41,7 +41,7 @@ events_table = events_table.add_columns(date_format(col("event_time"), "yyyy-MM-
     .add_columns(date_format(col("event_time"), "mm").alias("event_minute"))
 
 ip_to_location_df = pd.read_csv(
-    os.path.join(os.path.dirname(__file__), "IP2LOCATION-LITE-DB1.CSV"),
+    os.path.join(os.path.dirname(__file__), "ip_location.csv"),
     names=ip_location_csv_schema,
     dtype=ip_location_csv_schema
 )
@@ -61,6 +61,7 @@ table_env.create_table(
     .option("path", settings.LOCAL_EVENTS_URI)
     .option("sink.partition-commit.trigger", 'process-time')
     .option("sink.partition-commit.policy.kind", "success-file")
+    .option("sink.partition-commit.delay", "1 minute")
     .format("parquet")
     .partitioned_by("event_date", "event_hour", "event_minute")
     .build()

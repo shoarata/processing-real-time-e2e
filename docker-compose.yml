@@ -41,6 +41,8 @@ services:
       replicas: 3
     depends_on:
       - flinkjobmanager
+    volumes:
+      - ./events_processing/events_data:/tmp/events_data
     command: taskmanager
   flink_process:
     build: events_processing
