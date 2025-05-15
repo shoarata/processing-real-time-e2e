@@ -13,7 +13,7 @@ from config import settings
 from schemas import events_raw_schema, enriched_events_schema, ip_location_csv_schema
 
 env = StreamExecutionEnvironment.get_execution_environment()
-env.enable_checkpointing(1000)
+env.enable_checkpointing(60_000)
 
 env_settings = EnvironmentSettings.new_instance().in_streaming_mode().build()
 table_env = StreamTableEnvironment.create(env, environment_settings=env_settings)

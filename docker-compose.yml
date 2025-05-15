@@ -51,7 +51,6 @@ services:
       - |
         FLINK_PROPERTIES= 
         jobmanager.rpc.address: flinkjobmanager
-        parallelism.default: 2
     depends_on:
       - flinkjobmanager
     command: ["./bin/flink","run", "--jobmanager", "flinkjobmanager:8081", "--python", "event-processing.py"]
