@@ -58,7 +58,7 @@ table_env.create_table(
     path=ENRICHED_ECOMMERCE_EVENTS_TABLE_NAME,
     descriptor=TableDescriptor.for_connector("filesystem")
     .schema(enriched_events_schema)
-    .option("path", settings.LOCAL_EVENTS_URI)
+    .option("path", settings.S3_EVENTS_URI)
     .option("sink.partition-commit.trigger", 'process-time')
     .option("sink.partition-commit.policy.kind", "success-file")
     .option("sink.partition-commit.delay", "1 minute")

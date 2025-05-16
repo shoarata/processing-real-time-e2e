@@ -7,3 +7,4 @@ poetry.lock
 # Ignore dynaconf secret files
 .secrets.*
 *.jar
+.env

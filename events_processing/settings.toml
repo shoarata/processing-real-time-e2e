@@ -1,6 +1,6 @@
 ecommerce_topic_name = "ecommerce_online_events"
 consumer_group_id = "pyflink_consumer"
-s3_events_uri = "s3://ecommerce-project-sho/events"
+s3_events_uri = "s3://ecommerce-project-sho/events_raw"
 local_events_uri = "file:///tmp/events_data"
 [kafka_config]
 bootstrap_servers = "kafka:9092"
