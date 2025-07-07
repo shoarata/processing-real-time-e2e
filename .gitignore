@@ -1,5 +1,5 @@
 .DS_Store
-.ipynb_checkpoints/*
+.ipynb_checkpoints
 .idea/*
 *.csv
 poetry.lock
@@ -8,3 +8,5 @@ poetry.lock
 .secrets.*
 *.jar
 .env
+.terraform
+.terraform.lock.hcl

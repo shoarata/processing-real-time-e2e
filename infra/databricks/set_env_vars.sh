@@ -1,0 +1,4 @@
+#!/bin/bash
+export TF_VAR_aws_client_id=$AWS_SECRET_KEY_ID
+export TF_VAR_aws_client_secret=$AWS_SECRET_ACCESS_KEY
+export TF_VAR_db_account_id=$databricks_account_id
