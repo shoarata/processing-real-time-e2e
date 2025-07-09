@@ -18,8 +18,8 @@ provider "databricks" {
   alias = "mws"
   host = "https://accounts.cloud.databricks.com"
   account_id = var.db_account_id
-  client_id = var.aws_client_id
-  client_secret = var.aws_client_secret
+  client_id = var.db_client_id
+  client_secret = var.db_client_secret
 }
 provider "aws" {
   region = var.aws_region

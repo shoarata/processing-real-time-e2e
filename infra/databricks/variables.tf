@@ -1,5 +1,5 @@
-variable "aws_client_id" {}
-variable "aws_client_secret" {}
+variable "db_client_id" {}
+variable "db_client_secret" {}
 variable "db_account_id" {}
 
 variable "aws_region" {}
