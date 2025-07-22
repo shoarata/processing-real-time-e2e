@@ -2,7 +2,6 @@
 .ipynb_checkpoints
 .idea/*
 *.csv
-poetry.lock
 **/__pycache__/*
 # Ignore dynaconf secret files
 .secrets.*
