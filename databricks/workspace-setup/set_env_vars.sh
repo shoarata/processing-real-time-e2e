@@ -1,5 +1,6 @@
 #!/bin/bash
-export TF_VAR_db_client_id=$DATABRICKS_CLIENT_ID
-export TF_VAR_db_client_secret=$DATABRICKS_CLIENT_SECRET
+export TF_VAR_db_client_id=$databricks_client_id
+export TF_VAR_db_client_secret=$databricks_client_secret
 export TF_VAR_db_account_id=$databricks_account_id
-export TF_VAR_db_main_account_email=$DATABRICKS_PERSONAL_ACCOUNT_EMAIL
+export TF_VAR_db_main_account_email=$databricks_personal_account_email
+export TF_VAR_aws_account_id=$aws_account_id

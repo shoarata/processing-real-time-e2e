@@ -21,6 +21,13 @@ provider "databricks" {
   client_id = var.db_client_id
   client_secret = var.db_client_secret
 }
+provider "databricks" {
+  alias="ws"
+  host = databricks_mws_workspaces.main_ws.workspace_url
+  account_id = var.db_account_id
+  client_id = var.db_client_id
+  client_secret = var.db_client_secret
+}
 provider "aws" {
   region = var.aws_region
 }

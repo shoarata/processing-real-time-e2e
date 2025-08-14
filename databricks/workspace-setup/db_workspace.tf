@@ -1,4 +1,4 @@
-resource "databricks_mws_workspaces" "this" {
+resource "databricks_mws_workspaces" "main_ws" {
   provider = databricks.mws
   account_id     = var.db_account_id
   workspace_name = "${var.resource_prefix}_workspace"
@@ -9,5 +9,5 @@ resource "databricks_mws_workspaces" "this" {
 }
 
 output "databricks_host" {
-  value = databricks_mws_workspaces.this.workspace_url
+  value = databricks_mws_workspaces.main_ws.workspace_url
 }

@@ -6,3 +6,5 @@ variable "db_main_account_email" {}
 variable "aws_region" {}
 variable "aws_vpc_cidr_block" {}
 variable "resource_prefix" {}
+variable "aws_account_id" {}
+variable "aws_external_data_s3_bucket_name" {}
